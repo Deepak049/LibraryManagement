@@ -1,0 +1,48 @@
+{{nav-bar title="Book Details" session=this.session user=this.currentUser.user}}
+
+<div class="book-detail">
+    <h3 class="detail-title">{{this.model.book.title}}</h3>
+    <h4 class="detail-author">By {{this.model.book.author}}</h4>
+    <hr>
+    
+    <div class="section">
+        <h6 class="detail-category">Genre: {{this.model.book.category}}</h6>
+        <h6 class="detail-isbn">ISBN: {{this.model.book.isbn}}</h6>
+    </div>
+
+    <div class="description">
+        <h6 class="desc-title">Description</h6>
+        <p class="desc-text">{{this.model.book.description}}</p>
+    </div>
+
+    <div class="price-contents">
+        <div class="row">
+            <label for="detail-due">Due date:</label>
+            <p class="detail-due">{{format-date this.model.due_date}}</p>
+        </div>
+        <div class="row">
+            <label for="detail-price">Price:</label>
+            <p class="detail-price">{{this.model.book.price}}</p>
+        </div>
+        <div class="row">
+            <label for="detail-fine">Fine:</label>
+            <p class="detail-fine">{{this.model.book.fine}}</p>
+        </div>
+        <div class="row">
+            <button {{action "showDialog"}} class="btn btn-primary borrow">Borrow</button>
+        </div>
+    </div>
+</div>
+
+{{!-- Confirmation dialog box for borrowing --}}
+<div class="dialog-container {{if this.dialogBox "show-dialog" "hide-dialog"}}">
+    <div class="dialog">
+        <h5>You have {{this.currentUser.user.wallet}} Rupees in your wallet</h5>
+        <h5>Book price is {{this.model.book.price}}</h5>
+        <h5 class="confirmation">Are you sure, you want to borrow this book?</h5>
+        <div class="dialog-buttons">
+            <button {{action "borrowBook"}} class="btn btn-success">Yes</button>
+            <button {{action "hideDialog"}} class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+</div>

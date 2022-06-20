@@ -1,0 +1,42 @@
+<section id="hero" class="hero d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-4">
+          <h2 data-aos="fade-up">Welcome to Library!</h2>
+          <blockquote data-aos="fade-up" data-aos-delay="100">
+            <p>The only thing you absolutely have to know is the location of the library.</p>
+            <p>- Albert Einstein</p>
+          </blockquote>
+          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+              {{!-- actions --}}
+                {{#if session.isAuthenticated}}
+                {{#unless dashboard}}
+                    {{#if this.currentUser.user.is_admin}}
+                        {{#link-to 'adminDashboard' class="btn-watch-video"}}Dashboard{{/link-to}}
+                    {{else}}
+                        {{#link-to 'dashboard' class="btn-watch-video"}}Dashboard{{/link-to}}
+                    {{/if}}    
+                {{/unless}}
+                <a href="#" class="btn-watch-video" {{action 'logout'}}>Logout</a>
+                {{#unless profile }}
+                    <div class="hover-profile">
+                        {{#link-to 'updateProfile'}}<i class='fas fa-user-alt'></i>{{/link-to}}
+                        {{#unless this.currentUser.user.is_admin }}
+                            <div class="contents">
+                                <p>Wallet (<i class="fa-solid fa-rupee-sign"></i>)</p>
+                                <div class="wallet">
+                                    <p>You have <b>{{this.currentUser.user.wallet}}</b> rupees.</p>
+                                </div>
+                            </div>
+                        {{/unless}}
+                    </div>
+                {{/unless}}
+                {{else}}
+                    {{#link-to 'login' class="btn-watch-video"}}Login{{/link-to}}
+                    {{#link-to 'signup' class="btn-watch-video"}}Signup{{/link-to}}
+                {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

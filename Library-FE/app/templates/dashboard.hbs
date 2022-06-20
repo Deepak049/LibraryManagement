@@ -1,0 +1,84 @@
+{{nav-bar title="Dashboard" dashboard=true session=this.session user=this.currentUser.user}}
+
+<h4 class="greeting">Welcome {{this.currentUser.user.first_name}} {{this.currentUser.user.last_name}} to the Library!</h4>
+
+{{!-- borrowed books content --}}
+<div class="content">
+    <div class="subheading clickable" {{action "toggleBorrowed" on="click"}}>
+        <h4>Borrowed Books<span class="books-count">({{this.currentUser.user.orders.length}})</span></h4>
+        <h4 class="symbol {{unless this.borrowedOpen "changeToPlus"}}">-</h4>
+    </div>
+    <div class="books {{unless this.borrowedOpen "hide-contents"}}">
+        {{#unless this.model.orders}}
+            <h5 class="noBooksText">You don't have any books.</h5>
+        {{else}}
+            <p class="warning-text">Fine will be charged per day if not returned on/before due date!</p>
+            {{#each this.model.orders as |order|}}
+                <div class="book row">
+                    <div class="col-md-6">
+                        <p class="title">{{order.book_id.title}} - {{order.book_id.author}}</p>
+                        <p class="bought">Ordered on: {{format-date order.order_date}}</p>
+                        <p class="due">Due: {{format-date order.due_date}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="price">Price: {{order.book_id.price}}</p>
+                        <p class="fine">Fine: {{order.book_id.fine}}</p>
+                        <button {{action "returnBook" order.id}} class="btn btn-primary">Return</button>
+                    </div>
+                </div>
+                <hr>
+            {{/each}}
+        {{/unless}}
+    </div>
+</div>
+
+{{!-- new books content --}}
+<div class="content">
+    <div class="subheading clickable" {{action "toggleBooks" on="click"}}>
+        <h4>Books</h4>
+        <h4 class="symbol {{unless this.booksOpen "changeToPlus"}}">-</h4>
+    </div>
+    {{!-- checks user doesn't exceed borrow limit and has money in wallet --}}
+    <div class="books 
+        {{unless this.booksOpen "hide-contents"}}
+        {{unless this.currentUser.user.wallet "disableContent"}}
+        {{unless (check-borrowed this.currentUser.user.orders) "disableContent"}}">
+        {{#unless this.model.books}}
+            <h5 class="noBooksText">There are no books to show.</h5>
+        {{else}}
+            {{#unless this.currentUser.user.wallet}}
+                <p class="warning-text">You don't have money in your wallet! Contact Admin!</p>
+            {{/unless}}
+
+            {{#unless (check-borrowed this.currentUser.user.orders)}}
+                <p class="warning-text">You have exceeded the borrowing limit!</p>
+            {{/unless}}
+
+            {{#each this.model.books as |book|}}
+                <div class="book row 
+                    {{unless book.is_active "disabled"}} 
+                    {{unless book.quantity "disabled"}}">
+                    <div class="col-md-6">
+                        <p class="title">{{book.title}}</p>
+                        <p class="author">{{book.author}}</p>
+                        <p class="price">Price: {{book.price}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        {{!-- checks if book is active and available --}}
+                        {{#if book.is_active}}
+                            {{#if book.quantity}}
+                                <p class="quantity">Copies left: {{book.quantity}}</p>
+                                {{#link-to 'books' book.id class="btn btn-primary order"}}Borrow{{/link-to}}
+                            {{else}}
+                                <p class="not-available">No copies left</p>
+                            {{/if}}
+                        {{else}}
+                            <p class="not-available">Not available</p>
+                        {{/if}}
+                    </div>
+                </div>
+                <hr>
+            {{/each}}
+        {{/unless}}
+    </div>
+</div>

@@ -1,0 +1,97 @@
+{{nav-bar title="AdminDashboard" dashboard=true session=this.session user=this.currentUser.user}}
+
+{{!-- left pane for selecting different tab --}}
+<div class="admin-dashboard row">
+    <div class="col-sm-3 left-pane">
+        <p {{action "toggleBooks" on="click"}}
+        class="{{if this.booksOpen "active"}}">Books</p>
+        <p {{action "toggleUsers" on="click"}}
+        class="{{if this.usersOpen "active"}}">Users</p>
+        <p {{action "toggleOrders" on="click"}}
+        class="{{if this.ordersOpen "active"}}">Orders</p>
+    </div>
+
+    {{!-- books content --}}
+    <div class="col-sm-9 main-content">
+        <div class="books {{unless this.booksOpen "hide-content"}}">
+            <div class="header">
+                <h3 class="title">Books</h3>
+                {{#link-to 'addBook' class="btn btn-primary add-button"}}Add book{{/link-to}}
+            </div>
+            <hr>
+            {{#each this.model.books as |book|}}
+                <div class="book row">
+                    <div class="col-md-6">
+                        <p class="title">{{book.title}}</p>
+                        <p class="author">{{book.author}}</p>
+                        <p class="quantity">Quantity: {{book.quantity}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="price">Price: {{book.price}}</p>
+                        {{#link-to 'edit-book' book.id class="btn btn-primary order"}}Edit{{/link-to}}
+                        {{#if book.is_active}}
+                            <button {{action "disableBook" book}} class="btn btn-danger">Disable</button>  
+                        {{else}}
+                          <button {{action "enableBook" book}} class="btn btn-success">Enable</button>  
+                        {{/if}}
+                    </div>
+                </div>
+                <hr>
+            {{/each}}
+        </div>
+
+        {{!-- users content --}}
+        <div class="users {{unless this.usersOpen "hide-content"}}">
+            <div class="header">
+                <h3 class="title">Users</h3>
+                {{#link-to 'addUser' class="btn btn-primary add-button"}}Add User{{/link-to}}
+            </div>
+            <hr>
+            {{#each this.model.users as |user|}}
+                <div class="user row">
+                    <div class="col-md-6">
+                        <p class="name">{{user.first_name}} {{user.last_name}}</p>
+                        <p class="email">{{user.email}}</p>
+                        <p class="admin">Admin: {{user.is_admin}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="wallet">Wallet: {{user.wallet}}</p>
+                        {{#link-to 'editUser' user.id class="btn btn-primary order"}}Edit{{/link-to}}
+                        {{#if user.is_active}}
+                            <button {{action "disableUser" user}} class="btn btn-danger">Disable</button>
+                        {{else}}
+                            <button {{action "enableUser" user}} class="btn btn-success">Enable</button>
+                        {{/if}}
+                    </div>
+                </div>
+                <hr>
+            {{/each}}
+        </div>
+
+
+        {{!-- orders content --}}
+        <div class="orders {{unless this.ordersOpen "hide-content"}}">
+            <div class="header">
+                <h3 class="title">Orders</h3>
+            </div>
+            <hr>
+            {{#each this.model.orders as |order|}}
+                <div class="order row">
+                    <div class="col-md-6">
+                        <p class="book">{{order.book_id.title}}</p>
+                        <p class="user">{{order.user_id.email}}</p>
+                        <p class="order">Ordered on: {{format-date order.order_date}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        {{#if order.return_date}}
+                            <p class="return">Returned on: {{format-date order.return_date}}</p>
+                        {{else}}
+                            <p class="due">Due on: {{format-date order.due_date}}</p>
+                        {{/if}}
+                    </div>
+                </div>
+                <hr>
+            {{/each}}
+        </div>
+    </div>
+</div>

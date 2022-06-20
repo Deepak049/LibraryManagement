@@ -1,0 +1,96 @@
+.book-detail{
+    padding: 30px 50px;
+
+    .detail-title{
+        color: #007bff;
+        text-align: center;
+    }
+    
+    .detail-author{
+        text-align: center;
+        font-style: italic;
+    }
+
+    .section{
+        display: flex;
+        justify-content:space-evenly;
+    }
+
+    .description{
+        padding: 10px 100px;
+
+        .desc-title{
+            padding: 0 10px;
+            color: #011f4b;
+        }
+
+        .desc-text{
+            padding: 15px;
+            border: 1px solid black;
+            border-radius: 5px;
+            color: #6497b1;
+        }
+    }
+
+    .price-contents{
+        float: right;
+        padding: 10px 120px;
+
+        .row{
+            justify-content: end;
+        }
+
+        p{
+            padding: 0 5px;
+        }
+
+        label{
+            font-style: italic;
+            font-weight: 500;
+            color: #011f4b;
+        }
+
+        .borrow{
+            text-align: end;
+        }
+    }
+}
+
+.hide-dialog{
+    visibility: hidden;
+}
+
+.show-dialog{
+    visibility: visible;
+}
+
+.dialog-container{
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+.dialog{
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 30px 50px;
+    width: 600px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.dialog-buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.confirmation{
+    padding: 10px;
+}

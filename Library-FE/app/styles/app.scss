@@ -1,0 +1,17 @@
+@import "./form";
+@import "./dashboard";
+@import "./bookPage";
+@import "./navbar";
+@import "./profile";
+@import "./adminDashboard";
+@import "./homepage";
+
+
+html {
+    width: 100vw;
+}
+
+.not-found{
+    width: 100%;
+    height: 100%;
+}

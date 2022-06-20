@@ -1,0 +1,62 @@
+.admin-dashboard{
+    padding: 50px;
+
+    .left-pane{
+        border-right: 1px solid rgba(0, 0, 0, .1);
+        p{
+            color: #007bff;
+            padding: 10px;
+            cursor: pointer;
+        }
+    }
+
+    .main-content{
+        padding: 10px;
+        text-align: center;
+
+        .header{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .add-button{
+                position: absolute;
+                margin: 10px;
+                right: 2%;
+            }
+        }
+
+        .book{
+            .title{
+                font-weight: bold;
+            }
+        }
+
+        .user{
+            .name{
+                font-weight: bold;
+            }
+        }
+
+        .order{
+            .book{
+                font-weight: bold;
+            }
+
+            .due{
+                color: red;
+            }
+        }
+    }
+
+    .hide-content{
+        visibility: hidden;
+        display: none;
+    }
+
+    .active{
+        border-left: 5px solid #007bff;
+        background-color: #eeeeee;
+        font-weight: bold;
+    }
+}

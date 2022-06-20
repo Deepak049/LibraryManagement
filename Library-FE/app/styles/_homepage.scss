@@ -1,0 +1,103 @@
+:root {
+    --font-default: Open Sans, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, Liberation Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    --font-primary: Montserrat, sans-serif;
+    --font-secondary: Raleway, sans-serif;
+}
+  
+:root {
+    --color-default: #2b180d;
+    --color-primary: #56b8e6;
+    --color-secondary: #1b2f45;
+}
+
+.hero {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: url("/library.jpg") top center;
+    background-size: cover;
+
+    .fa-user-alt{
+      color: #56b8e6;
+      margin-left: 25px;
+    }
+}
+  
+@media (min-width: 1034px) {
+  .hero:after {
+    position: absolute;
+    content: "";
+    width: 40%;
+    background: var(--color-secondary);
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.hero:before {
+  position: absolute;
+  content: "";
+  inset: 0;
+}
+
+@media (max-width: 1034px) {
+  .hero:before {
+    background: rgba(27, 47, 69, 0.7);
+  }
+}
+
+.hero .container {
+  z-index: 1;
+}
+
+@media (min-width: 1365px) {
+  .hero {
+    background-attachment: fixed;
+  }
+}
+
+.hero h2 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  font-family: var(--font-secondary);
+}
+
+.hero blockquote {
+  color: #fff;
+  padding-left: 20px;
+  font-size: 15px;
+  font-family: var(--font-default);
+  border-left: 2px solid var(--color-primary);
+  margin: 40px 0;
+}
+
+
+.hero .btn-watch-video {
+  font-size: 16px;
+  transition: 0.5s;
+  margin-left: 25px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+}
+
+.hero .btn-watch-video:hover {
+  color: #fff;
+}
+
+
+@media (max-width: 640px) {
+  .hero h2 {
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  .hero .btn-get-started,
+  .hero .btn-watch-video {
+    font-size: 13px;
+  }
+}

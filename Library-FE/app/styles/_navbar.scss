@@ -1,0 +1,45 @@
+a:hover{
+    text-decoration: none;
+}
+
+.actions{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+a{
+    padding-left: 15px;
+    color: #007bff;
+}
+
+.hover-profile{
+    .contents{
+        padding: 20px;
+        background-color: #eeeeee;
+        border-radius: 3px;
+        display: none;
+    }
+}
+
+.hover-profile:hover{
+    .contents{
+        display: block;
+        position: absolute;
+        
+        .wallet{
+            display: flex;
+        }
+    }
+}
+
+.fa-user-alt{
+    font-size: 18px;
+}
+
+.fa-rupee-sign{
+    font-size: 15px;
+    padding: 5px;
+    color: #007bff;
+}

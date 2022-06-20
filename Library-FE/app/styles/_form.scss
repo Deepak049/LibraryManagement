@@ -1,0 +1,30 @@
+.form{
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .form-title{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .submit{
+        text-align: center;
+    }
+
+    .error{
+        color: red;
+        text-align: center;
+    }
+}
+
+.toggle{
+    width: 20px;
+    height: 20px;
+    margin-top: 8px;
+    margin-left: 5px;
+}

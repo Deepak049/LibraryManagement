@@ -1,0 +1,35 @@
+<div class="nav">
+    <h2>{{title}}</h2>
+    <div class="actions">
+        {{!-- checks if user is authenticated --}}
+        {{#if session.isAuthenticated}}
+            {{#unless dashboard}}
+            {{!-- different dashboard for admin and users --}}
+                {{#if user.is_admin}}
+                    {{#link-to 'adminDashboard'}}Dashboard{{/link-to}}
+                {{else}}
+                    {{#link-to 'dashboard'}}Dashboard{{/link-to}}
+                {{/if}}    
+            {{/unless}}
+            <a href="#" {{action 'logout'}}>Logout</a>
+            {{#unless profile }}
+            {{!-- hovering profile shows wallet info for user --}}
+                <div class="hover-profile">
+                    {{#link-to 'updateProfile'}}<i class='fas fa-user-alt'></i>{{/link-to}}
+                    {{#unless user.is_admin }}
+                        <div class="contents">
+                            <p>Wallet (<i class="fa-solid fa-rupee-sign"></i>)</p>
+                            <div class="wallet">
+                                <p>You have <b>{{user.wallet}}</b> rupees.</p>
+                            </div>
+                        </div>
+                    {{/unless}}
+                </div>
+            {{/unless}}
+        {{else}}
+        {{!-- shows login and signup for unauthenticated users --}}
+            {{#link-to 'login'}}Login{{/link-to}}
+            {{#link-to 'signup'}}Signup{{/link-to}}
+        {{/if}}
+    </div>
+</div>

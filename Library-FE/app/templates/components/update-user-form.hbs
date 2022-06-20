@@ -1,0 +1,98 @@
+{{nav-bar title="User Profile" profile=true session=this.session}}
+
+<div class="profile-contents">
+    <i class="fas fa-user-circle"></i>
+    
+    <form class="form-group" {{action "submit" on="submit"}}>
+
+    {{!-- error message --}}
+    {{#if errorMessage}}
+      {{#each errorMessage as |error|}}
+        <h6 class="error">- {{error}}</h6>
+      {{/each}}
+    {{/if}}
+
+    {{!-- only user can see wallet info in profile --}}
+    {{#unless user.is_admin }}
+      <div class="row">
+        <label class="col-sm-4 col-form-label" for="email">Wallet</label>
+        <div class="col-sm-8">
+          <p class="col-form-label">{{user.wallet}}</p>
+        </div>
+      </div>
+    {{/unless}}
+
+    <div class="row form-group">
+      <label class="col-sm-4 col-form-label" for="email">Email</label>
+      <div class="col-sm-8">
+        <p class="col-form-label">{{user.email}}</p>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="first_name">First Name</label>
+      <div class="col-sm-8">
+        {{input value=user.first_name placeholder="Enter First Name" class="form-control"}}
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="last_name">Last Name</label>
+      <div class="col-sm-8">
+        {{input value=user.last_name placeholder="Enter Last Name" class="form-control"}}
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="Address">Address</label>
+      <div class="col-sm-8">
+        {{input value=user.address placeholder="Enter Address" class="form-control"}}
+      </div>
+    </div>
+
+    {{!-- change password link --}}
+    <a href="" class="change-password" {{action "showDialog" on="click"}}>Change password</a>
+
+    <div class="submit">
+      <button class="btn btn-success" type="submit">Update</button>
+    </div>
+  </form>
+</div>
+
+{{!-- change password dialog box --}}
+<div class="dialog-container {{if this.dialogBox "show-dialog" "hide-dialog"}}">
+    <div class="dialog password-dialog">
+        <i class="fas fa-times x-close" {{action "hideDialog" on="click"}}></i>
+        <div class="contents">
+            <form class="form-group" {{action "submitPassword" on="submit"}}>
+                <h4 class="title">Password Change</h4>
+                <hr>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="password">Old Password</label>
+                    <div class="col-sm-8">
+                        {{input required=true value=user.old_password type="password" placeholder="Enter Old Password" class="form-control"}}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="password">New Password</label>
+                    <div class="col-sm-8">
+                        {{input required=true value=user.password type="password" placeholder="Enter New Password" class="form-control"}}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="password">Confirm Password</label>
+                    <div class="col-sm-8">
+                        {{input required=true value=user.password_confirmation type="password" placeholder="Confirm New Password" class="form-control"}}
+                    </div>
+                </div>
+
+                <div class="submit">
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

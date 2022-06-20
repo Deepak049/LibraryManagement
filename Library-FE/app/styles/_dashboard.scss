@@ -1,0 +1,91 @@
+.greeting{
+    margin: 10px;
+}
+
+.content{
+    margin: 30px 10px;
+    transition: height 0.3s ease-in-out;
+
+    .subheading{
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        background-color: #007bff;
+        width: 100%;
+        color: white;
+        border-radius: 0.25rem;
+
+        .books-count{
+            padding: 5px;
+            font-size: 0.8em;
+        }
+
+        &.clickable{
+            cursor: pointer;
+        }
+
+        .symbol{
+            padding: 0 10px;
+
+            &.changeToPlus{
+                &.symbol{
+                    visibility: hidden;
+                }
+                &.symbol:after{
+                    content: "+";
+                    visibility: visible;
+                }
+            }
+        }
+    }
+
+    .books{
+        margin: 20px 50px;
+        cursor: default;
+
+        .noBooksText{
+            color: grey;
+        }
+
+        &.hide-contents{
+            visibility: hidden;
+            display: none;
+        }
+
+        .warning-text{
+            color: red
+        }
+    
+        .book{
+            margin: 20px;
+            align-items: center;
+
+            &.disabled{
+                color: #999999;
+            }
+            
+            .not-available{
+                color: red;
+            }
+
+            .title{
+                font-weight: bold;
+            }
+        }
+    }
+
+    .disableContent{
+        color: #999999;
+        pointer-events: none;
+
+        .btn{
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
+        }
+
+        .book .not-available{
+            color: #999999;
+        }
+    }
+}
