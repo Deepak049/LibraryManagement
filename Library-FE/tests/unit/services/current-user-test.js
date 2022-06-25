@@ -9,4 +9,9 @@ module('Unit | Service | current-user', function(hooks) {
     let service = this.owner.lookup('service:current-user');
     assert.ok(service);
   });
+
+  test('check fetchUser works', async function(assert) {
+    let service = this.owner.lookup('service:current-user');
+    assert.equal(service.user, null);
+  });
 });

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
     def index
         user = User.find_by_email(params[:email]) if params[:email]
-        if(@user.is_admin && !user)
+        if(!user && @user.is_admin)
             # listing all the users for admin
             render json: User.all.order(created_at: :desc)
         else
@@ -53,37 +53,43 @@ class UsersController < ApplicationController
 
         # seperating admin update and user's profile update
         if(@user.is_admin)
-            admin_user_update(user)
+            return admin_user_update(user)
         else
-            user_update(user)
-        end
-
-        if user.save()
-            render json: user, status: 200
-        else
-            render json: {:errors => user.errors.full_messages}, status: 400
+            return user_update(user)
         end
     end
 
     def admin_user_update(user)
-        user.first_name = params[:user][:first_name]
-        user.last_name = params[:user][:last_name]
-        user.address = params[:user][:address]
-        user.wallet = params[:user][:wallet]
-        user.is_admin = params[:user][:is_admin]
-        user.is_active = params[:user][:is_active]
+        user.first_name = params[:user][:first_name] if params[:user][:first_name]
+        user.last_name = params[:user][:last_name] if params[:user][:last_name]
+        user.address = params[:user][:address] if params[:user][:address]
+        user.wallet = params[:user][:wallet] if params[:user][:wallet]
+        user.is_admin = params[:user][:is_admin] if params[:user][:is_admin]
+        user.is_active = params[:user][:is_active] if params[:user][:is_active]
         
         if(params[:user][:password])
             user.password = params[:user][:password]
         end
+
+        if user.save()
+            render json: user, status: 200 and return
+        else
+            render json: {:errors => user.errors.full_messages}, status: 400 and return
+        end
     end
 
     def user_update(user)
-        user.first_name = params[:user][:first_name]
-        user.last_name = params[:user][:last_name]
-        user.address = params[:user][:address]
+        user.first_name = params[:user][:first_name] if params[:user][:first_name]
+        user.last_name = params[:user][:last_name] if params[:user][:last_name]
+        user.address = params[:user][:address] if params[:user][:address]
         if(params[:user][:password])
-            change_password(user)
+            return change_password(user)
+        end
+
+        if user.save()
+            render json: user, status: 200 and return
+        else
+            render json: {:errors => user.errors.full_messages}, status: 400 and return
         end
     end
 
@@ -94,12 +100,12 @@ class UsersController < ApplicationController
             user.password_confirmation = params[:user][:password_confirmation]
             
             if user.save()
-                render json: user, status: 200
+                render json: user, status: 200 and return
             else
-                render json: {:errors => user.errors.full_messages}, status: 400
+                render json: {:errors => user.errors.full_messages}, status: 400 and return
             end
         else
-            render json: {:errors => "Old Password is not correct!"}, status: 400
+            render json: {:errors => "Old Password is not correct!"}, status: 400 and return
         end
     end
 

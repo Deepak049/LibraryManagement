@@ -8,10 +8,10 @@ module('Integration | Helper | check-borrowed', function(hooks) {
 
   // Replace this with your real tests.
   test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
+    this.set('inputValue', ["dummy-order-1", "dummy-order-2"]);
 
     await render(hbs`{{check-borrowed inputValue}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.equal(this.element.textContent.trim(), "false");
   });
 });

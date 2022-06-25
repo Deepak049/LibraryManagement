@@ -1,6 +1,6 @@
 <div class="nav">
     <h2>{{title}}</h2>
-    <div class="actions">
+    <div data-test-actions class="actions">
         {{!-- checks if user is authenticated --}}
         {{#if session.isAuthenticated}}
             {{#unless dashboard}}

@@ -10,17 +10,19 @@ module('Integration | Component | nav-bar', function(hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`{{nav-bar}}`);
+    this.set('title', "testing")
+    await render(hbs`{{nav-bar title=title}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.dom("h2").hasText("testing")
+    assert.dom("[data-test-actions]").hasText("Login Signup")
 
-    // Template block usage:
-    await render(hbs`
-      {{#nav-bar}}
-        template block text
-      {{/nav-bar}}
-    `);
+    this.set('session', {"isAuthenticated": true})
+    this.set('user', {"wallet": 100})
+    await render(hbs`{{nav-bar title=title session=session user=user}}`);
+    assert.dom("[data-test-actions]").hasText("Dashboard Logout Wallet () You have 100 rupees.")
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    this.set('user', {"is_admin": true, "wallet": 100})
+    await render(hbs`{{nav-bar title=title session=session user=user}}`);
+    assert.dom("[data-test-actions]").hasText("Dashboard Logout")
   });
 });

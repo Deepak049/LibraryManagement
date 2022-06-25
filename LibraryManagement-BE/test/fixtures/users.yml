@@ -1,0 +1,17 @@
+user:
+  id: 1
+  first_name: "Test 1"
+  last_name: "User"
+  email: "testing@gmail.com"
+  password_digest: "password"
+  authentication_token: "abcdef"
+  is_admin: true
+
+not_admin:
+  id: 2
+  first_name: "Test 1"
+  last_name: "User"
+  email: "testing2@gmail.com"
+  password_digest: "password"
+  authentication_token: "abcdefg"
+  is_admin: false

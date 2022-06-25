@@ -7,10 +7,10 @@ class OrdersController < ApplicationController
             # checking the user has requesting their order
             @user.orders.each do |order|
                 if(order.id == params[:id])
-                    render json: Order.find(params[:id])
+                    render json: Order.find(params[:id]) and return
                 end
             end
-            render json: {:errors => "Unauthorized"}, status: 400
+            render json: {:errors => "Unauthorized"}, status: 400 and return
         end
     end
 
@@ -26,8 +26,6 @@ class OrdersController < ApplicationController
             # returns the active orders based on request
             if(params[:return_date])
                 orders = orders.where(return_date: nil)
-            else
-                orders = orders.where.not(return_date: nil)
             end
             render json: orders
         end
@@ -76,7 +74,7 @@ class OrdersController < ApplicationController
         # returning book
         order = Order.find(params[:id])
         order.return_date = params[:order][:return_date]
-        daysDiff = order.return_date - order.due_date
+        daysDiff = (order.return_date - order.due_date).to_i
         if(daysDiff > 0)
             fine = daysDiff * order.book.fine
             # checks the user has sufficient amount to pay the fine

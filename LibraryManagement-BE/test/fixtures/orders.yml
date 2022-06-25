@@ -1,0 +1,18 @@
+one:
+  id: 1
+  user_id: 2
+  book_id: 1
+  order_date: <%= Date.today %>
+  due_date: <%= Date.today + 15 %>
+
+two:
+  user_id: 1
+  book_id: 2
+  order_date: <%= Date.yesterday %>
+  due_date: <%= Date.today + 14 %>
+
+three:
+  user_id: 1
+  book_id: 3
+  order_date: <%= Date.yesterday %>
+  due_date: <%= Date.today + 14 %>

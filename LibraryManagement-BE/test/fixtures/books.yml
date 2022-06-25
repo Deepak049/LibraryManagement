@@ -1,0 +1,25 @@
+one:
+  id: 1
+  title: "Test Title"
+  isbn: 12345
+  author: "Author"
+  price: 100
+  fine: 10
+
+two:
+  id: 2
+  title: "hello"
+  isbn: 123456
+  author: "Tester"
+  price: 200
+  fine: 20
+
+three:
+  id: 3
+  title: "hi"
+  isbn: 1234567
+  author: "Tester"
+  price: 150
+  fine: 20
+  quantity: 1
+  
